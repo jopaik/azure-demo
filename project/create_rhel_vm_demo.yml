@@ -4,24 +4,6 @@
   connection: local
   gather_facts: false
   tasks:
-    - name: Create resource group
-      azure.azcollection.azure_rm_resourcegroup:
-        name: "{{ resource_group_name | default('demo') }}"
-        location: "{{ region }}"
-
-    - name: Create virtual network
-      azure.azcollection.azure_rm_virtualnetwork:
-        resource_group: "{{ resource_group_name | default('demo') }}"
-        name: "{{ vnet_name }}"
-        address_prefixes: "{{ vnet_cidr }}"
-
-    - name: Add subnet
-      azure.azcollection.azure_rm_subnet:
-        resource_group: "{{ resource_group_name | default('demo') }}"
-        name: "{{ subnet_name }}"
-        address_prefix: "{{ subnet_cidr }}"
-        virtual_network: "{{ vnet_name }}"
-
     - name: Create public IP address
       azure.azcollection.azure_rm_publicipaddress:
         resource_group: "{{ resource_group_name | default('demo') }}"
