@@ -22,3 +22,20 @@
         address_prefix: "{{ subnet_cidr }}"
         virtual_network: "{{ vnet_name }}"
 
+    - name: Create Network Security Group that allows SSH and RDP
+      azure_rm_securitygroup:
+        resource_group: "{{ resource_group_name | default('demo') }}"
+        name: "{{ network_sec_group_name }}"
+        rules:
+          - name: SSH
+            protocol: Tcp
+            destination_port_range: 22
+            access: Allow
+            priority: 1001
+            direction: Inbound
+          - name: RDP
+            protocol: Tcp
+            destination_port_range: 3389
+            access: Allow
+            priority: 1002
+            direction: Inbound
