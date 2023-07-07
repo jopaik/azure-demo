@@ -41,7 +41,10 @@
             direction: Inbound
           - name: HTTP
             protocol: Tcp
-            destination_port_range: 80
+            destination_port_range: 
+              - 80
+              - 443
+              - 8080
             access: Allow
             priority: 1003
             direction: Inbound
